@@ -38,7 +38,7 @@ namespace Steganography.Algorithms
 
             var data = ReadBytesFromColorArray(colors, offset);
 
-            return Encoding.ASCII.GetString(data);
+            return Encoding.UTF8.GetString(data);
         }
 
         public Bitmap HideBytes(byte[] data, Bitmap image, AlgorithmSettings settings)
