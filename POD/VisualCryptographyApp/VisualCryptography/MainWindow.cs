@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,20 @@ namespace VisualCryptography
         public List<Bitmap> Parts { get; set; }
         private int actualPartIndex;
         public Bitmap MergedParts { get; set; }
+        private Color LightPixel
+        {
+            get
+            {
+                if(whitePixelRadio.Checked)
+                {
+                    return Color.White;
+                }
+                else
+                {
+                    return Color.Transparent;
+                }
+            }
+        }
 
 
         public MainWindow()
@@ -69,29 +84,34 @@ namespace VisualCryptography
             nextPartButton.Enabled = false;
             partsCountLabel.Text = "-";
 
-            Parts = await Crypto.DivideImageAsync(OriginalImage);
-
+            Parts = await Crypto.DivideImageAsync(OriginalImage, LightPixel);
+            
             partsCountLabel.Text = $"{ Parts.Count }";
             previousPartButton.Enabled = true;
             nextPartButton.Enabled = true;
 
-            MergedParts = await Crypto.MergePartsAsync(Parts, Parts[0].Width, Parts[0].Height);
+            MergedParts = await Crypto.MergePartsAsync(Parts, Parts[0].Width, Parts[0].Height, LightPixel);
 
             mergedPartsButton.Enabled = true;
+
+            if(saveFileCheckBox.Checked)
+            {
+                await SaveFiles();
+            }
         }
 
         private void mergedPartsButton_Click(object sender, EventArgs e)
         {
             pictureBox.Image = MergedParts;
             actualPartIndex = 0;
-            partsCountLabel.Text = "-";
+            actualPartLabel.Text = "-";
         }
 
         private void originalImageButton_Click(object sender, EventArgs e)
         {
             pictureBox.Image = OriginalImage;
             actualPartIndex = 0;
-            partsCountLabel.Text = "-";
+            actualPartLabel.Text = "-";
         }
 
         private void previousPartButton_Click(object sender, EventArgs e)
@@ -123,6 +143,26 @@ namespace VisualCryptography
                 actualPartIndex++;
                 pictureBox.Image = Parts[actualPartIndex - 1];
                 actualPartLabel.Text = $"{actualPartIndex }";
+            }
+        }
+
+        private async Task SaveFiles()
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.DefaultExt = "png";
+            dialog.Title = "Zapisz wygenerowane obrazy";
+            dialog.Filter = "PNG files(*.png) | *.png";
+
+            if(dialog.ShowDialog() == DialogResult.OK)
+            {
+                var name = dialog.FileName.Replace(".png", "");
+
+                MergedParts.Save(name + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                
+                for(int i = 0; i < Parts.Count; i++)
+                {
+                    Parts[i].Save(name + "-part" + i + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                }
             }
         }
     }

@@ -40,7 +40,13 @@
             this.partsCountLabel = new System.Windows.Forms.Label();
             this.previousPartButton = new System.Windows.Forms.Button();
             this.nextPartButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.whitePixelRadio = new System.Windows.Forms.RadioButton();
+            this.transparentPixelRadio = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.saveFileCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imagePathLabel
@@ -73,9 +79,9 @@
             // startButton
             // 
             this.startButton.Enabled = false;
-            this.startButton.Location = new System.Drawing.Point(246, 560);
+            this.startButton.Location = new System.Drawing.Point(484, 557);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(119, 48);
+            this.startButton.Size = new System.Drawing.Size(119, 51);
             this.startButton.TabIndex = 3;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
@@ -163,11 +169,66 @@
             this.nextPartButton.UseVisualStyleBackColor = true;
             this.nextPartButton.Click += new System.EventHandler(this.nextPartButton_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.saveFileCheckBox);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.transparentPixelRadio);
+            this.groupBox1.Controls.Add(this.whitePixelRadio);
+            this.groupBox1.Location = new System.Drawing.Point(12, 548);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(437, 60);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ustawienia";
+            // 
+            // whitePixelRadio
+            // 
+            this.whitePixelRadio.AutoSize = true;
+            this.whitePixelRadio.Checked = true;
+            this.whitePixelRadio.Location = new System.Drawing.Point(132, 26);
+            this.whitePixelRadio.Name = "whitePixelRadio";
+            this.whitePixelRadio.Size = new System.Drawing.Size(48, 17);
+            this.whitePixelRadio.TabIndex = 0;
+            this.whitePixelRadio.TabStop = true;
+            this.whitePixelRadio.Text = "biały";
+            this.whitePixelRadio.UseVisualStyleBackColor = true;
+            // 
+            // transparentPixelRadio
+            // 
+            this.transparentPixelRadio.AutoSize = true;
+            this.transparentPixelRadio.Location = new System.Drawing.Point(186, 26);
+            this.transparentPixelRadio.Name = "transparentPixelRadio";
+            this.transparentPixelRadio.Size = new System.Drawing.Size(88, 17);
+            this.transparentPixelRadio.TabIndex = 1;
+            this.transparentPixelRadio.Text = "przezroczysty";
+            this.transparentPixelRadio.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Kolor jasnego piksela:";
+            // 
+            // saveFileCheckBox
+            // 
+            this.saveFileCheckBox.AutoSize = true;
+            this.saveFileCheckBox.Location = new System.Drawing.Point(339, 27);
+            this.saveFileCheckBox.Name = "saveFileCheckBox";
+            this.saveFileCheckBox.Size = new System.Drawing.Size(78, 17);
+            this.saveFileCheckBox.TabIndex = 3;
+            this.saveFileCheckBox.Text = "Zapisz pliki";
+            this.saveFileCheckBox.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(616, 620);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.nextPartButton);
             this.Controls.Add(this.previousPartButton);
             this.Controls.Add(this.partsCountLabel);
@@ -184,6 +245,8 @@
             this.ShowIcon = false;
             this.Text = "Kryptografia wizualna";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,6 +266,11 @@
         private System.Windows.Forms.Label partsCountLabel;
         private System.Windows.Forms.Button previousPartButton;
         private System.Windows.Forms.Button nextPartButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox saveFileCheckBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton transparentPixelRadio;
+        private System.Windows.Forms.RadioButton whitePixelRadio;
     }
 }
 
