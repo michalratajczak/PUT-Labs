@@ -106,7 +106,8 @@ namespace VisualCryptography
                 {
                     var color = image.GetPixel(x, y);                    
                     bool isLightPixel = !(color.ToArgb() == Color.Black.ToArgb());
-                    
+
+                    SetPixelsAsChessboard(ref parts, lightPixel, Color.Black, x, y, numberOfParts, isLightPixel, random);
                     switch(random.Next(1, 3))
                     {
                         case 1:
@@ -118,7 +119,7 @@ namespace VisualCryptography
                         case 3:
                             SetPixelsAsChessboard(ref parts, lightPixel, Color.Black, x, y, numberOfParts, isLightPixel, random);
                             break;
-                    }                    
+                    }
                 }
             }
 
@@ -139,8 +140,8 @@ namespace VisualCryptography
                             (x * scaleMultiplier) + j,
                             (y * scaleMultiplier) + i,
                             rng < 50 ?
-                            ((j % 2) + (isLightPixel ? 0 : (index % 2)) == 0 ? lightColor : darkColor) :
-                            ((j % 2) + (isLightPixel ? 0 : (index % 2)) == 1 ? lightColor : darkColor));
+                            ((isLightPixel ? j : j + (index % 2)) % 2 == 0 ? lightColor : darkColor) :
+                            ((isLightPixel ? j : j + (index % 2)) % 2 == 1 ? lightColor : darkColor));
                     }
                 }
             }            
@@ -160,8 +161,8 @@ namespace VisualCryptography
                             (x * scaleMultiplier) + i,
                             (y * scaleMultiplier) + j,
                             rng < 50 ?
-                            (((j + i) % 2) + (isLightPixel ? 0 : (index % 2)) == 0 ? lightColor : darkColor) :
-                            (((j + i) % 2) + (isLightPixel ? 0 : (index % 2)) == 1 ? lightColor : darkColor));
+                            ((isLightPixel ? (j + i) : (j + i) + (index % 2)) % 2 == 0 ? lightColor : darkColor) :
+                            ((isLightPixel ? (j + i) : (j + i) + (index % 2)) % 2 == 1 ? lightColor : darkColor));
                     }
                 }
             }
@@ -181,8 +182,8 @@ namespace VisualCryptography
                             (x * scaleMultiplier) + i,
                             (y * scaleMultiplier) + j,
                             rng < 50 ?
-                            ((j % 2) + (isLightPixel ? 0 : (index % 2)) == 0 ? lightColor : darkColor) :
-                            ((j % 2) + (isLightPixel ? 0 : (index % 2)) == 1 ? lightColor : darkColor));
+                            ((isLightPixel ? j : j + (index % 2)) % 2 == 0 ? lightColor : darkColor) :
+                            ((isLightPixel ? j : j + (index % 2)) % 2 == 1 ? lightColor : darkColor));
                     }
                 }
             }
